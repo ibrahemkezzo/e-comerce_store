@@ -18,8 +18,7 @@ return new class extends Migration
             $table->string('image');
             $table->decimal('price',8,2)->nullable();
             $table->decimal('discount_price', 8,2)->nullable();
-            $table->integer('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->text('color')->nullable();
             $table->text('size')->nullable();
             $table->timestamps();

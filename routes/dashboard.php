@@ -1,6 +1,7 @@
 <?php
 
-
+use App\Http\Controllers\Dashboard\IndexController;
+use App\Http\Controllers\Dashboard\SettingController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 

@@ -47,7 +47,7 @@
     <link rel="stylesheet" href="{{ asset('dashboard') }}/select2.min.css">
 </head>
 
-<body>
+<body class="rtl">
 
     <!-- page-wrapper Start-->
     <div class="page-wrapper">
@@ -196,7 +196,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0)">
+                                    <a href="{{route('logout')}}">
                                         <i data-feather="log-out"></i>Logout
                                     </a>
                                 </li>
