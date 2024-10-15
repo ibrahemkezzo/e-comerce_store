@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Setting;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +20,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        if(!app()->runningInConsole()){
+            $setting = Setting::firstOr(function(){
+                return Setting::create([
+                    'name'=>'site_name',
+                    'description'=>'laravel website',
+                ]);
+            });
+            view()->share('setting',$setting);
+        }
     }
 }
