@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\SettingUpdateRequest;
 use App\Http\Requests\Dashboard\UpdateSettingRequest;
 use App\Models\Setting;
 use App\Utils\ImageUpload;
@@ -21,7 +22,7 @@ class SettingController extends Controller
     }
 
 
-    public function update(UpdateSettingRequest $request, Setting $setting)
+    public function update(SettingUpdateRequest $request, Setting $setting)
     {
 
         // dd($request->validated());
