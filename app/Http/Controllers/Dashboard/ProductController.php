@@ -3,62 +3,70 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\Product\StoreProductRequest;
+use App\Services\CategoryService;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public CategoryService $categoryService;
+    public ProductService $productService;
+
+    public function __construct(CategoryService $categoryService, ProductService $productService)
+    {
+        $this->categoryService = $categoryService;
+        $this->productService = $productService;
+    }
+
     public function index()
     {
-        //
+        return view('dashboard.products.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function getall(Request $request)
+    {
+       return $this->productService->datatable();
+    }
+
+
     public function create()
     {
-        //
+
+        $categories = $this->categoryService->getAll();
+        return view('dashboard.products.create' , compact('categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+
+    public function store(StoreProductRequest $request)
+    {
+        $product = $this->productService->store($request->validated());
+        return redirect()->route('dashboard.products.index');
+    }
+
+
+    public function show($id)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+
+    public function edit($id)
     {
-        //
+        $categories = $this->categoryService->getAll();
+        $product = $this->productService->getById($id);
+       return view('dashboard.products.edit' , compact('categories', 'product'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+
+    public function update(Request $request, $id)
     {
-        //
+       $this->productService->update($id,$request->all());
+       return redirect()->route('dashboard.products.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy($id)
     {
         //
     }

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->text('color')->nullable();
             $table->text('size')->nullable();
+            $table->integer('quatity');
             $table->timestamps();
             $table->softDeletes();
         });
